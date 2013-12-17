@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import unyuho.common.gui.progressbar.EnumVector;
 import unyuho.common.gui.progressbar.GuiProgressBar;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -44,8 +45,8 @@ public class GuiProgressSample extends GuiContainer
     	int minValue = 0;
     	int maxValue = 100;
 
-    	//スクロールバー設定
-    	progressBarSample = new GuiProgressBar(container, scrollBarId, xPosition, yPosition, size);
+    	//スクロールバー設定(右へ進む)
+    	progressBarSample = new GuiProgressBar(container, scrollBarId, xPosition, yPosition, size, EnumVector.RIGHT);
     }
 
     @Override
