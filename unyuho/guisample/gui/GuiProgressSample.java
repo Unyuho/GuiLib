@@ -1,27 +1,24 @@
 package unyuho.guisample.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import unyuho.common.gui.GuiComponentContainer;
 import unyuho.common.gui.progressbar.EnumVector;
 import unyuho.common.gui.progressbar.GuiProgressBar;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiProgressSample extends GuiContainer
+public class GuiProgressSample extends GuiComponentContainer
 {
 	private static final ResourceLocation recource = new ResourceLocation("unyuho","textures/gui/Sample.png");
 
-	private GuiProgressBar progressBarSample;
-
     //container
     private ContainerProgressSample container;
-
 
     public GuiProgressSample(InventoryPlayer inventoryplayer, World world)
     {
@@ -46,24 +43,21 @@ public class GuiProgressSample extends GuiContainer
     	int maxValue = 100;
 
     	//スクロールバー設定(右へ進む)
-    	progressBarSample = new GuiProgressBar(container, scrollBarId, xPosition, yPosition, size, EnumVector.RIGHT);
-    }
+    	GuiProgressBar progressBarSample = new GuiProgressBar(container, scrollBarId, xPosition, yPosition, size, EnumVector.RIGHT);
 
-    @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2)
-    {
+    	addProgressBar(progressBarSample);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
     {
+    	//superたのむ
+    	super.drawGuiContainerBackgroundLayer(f, i, j);
+
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         //メイン画像
         mc.getTextureManager().bindTexture(recource);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-
-        //スクロールバーの描写
-        progressBarSample.drawScrollBar();
     }
 }

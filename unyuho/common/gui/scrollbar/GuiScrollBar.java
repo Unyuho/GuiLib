@@ -100,6 +100,8 @@ public abstract class GuiScrollBar extends Gui
         this.scrollSizeY = 0;
         this.offsetX = 0;
         this.offsetY = 0;
+
+        zLevel = 100.0F;
     }
 
     /**

@@ -22,6 +22,9 @@ public class GuiProgressBar extends Gui
     //プログレスバーのサイズ
     private int width;
 
+    //進行方向
+    private EnumVector vector;
+
     //使わないと思うけど、識別ID
     private int id;
 
@@ -34,20 +37,18 @@ public class GuiProgressBar extends Gui
     //プログレスバーの表示開始位置
     private int progressbarU;
 
-	//棒の部分(X座標)
-    private final static int U_BAR = 0;
-	//矢印部分の右端
-    private final static int U_ARROW = 72;
+	//左端
+    private final static int U_MIN = 0;
+	//右端
+    private final static int U_MAX = 72;
 
 	//色塗り部分
     private final static int V_INCREMENT = 16;
 	//デフォルト部分
     private final static int V_DEFAULT = 0;
 
+    //高さ
     private final static int BAR_HEIGHT = 16;
-
-    private EnumVector vector;
-
 
     public GuiProgressBar(IProgressBar container, int progressID, int xPosition, int yPosition)
     {
@@ -64,8 +65,9 @@ public class GuiProgressBar extends Gui
         this.vector = vector;
         this.enabled = true;
         this.drawBar = true;
+        zLevel = 100.0F;
 
-        this.progressbarU = U_ARROW - width;
+        this.progressbarU = U_MAX - width;
     }
 
 
