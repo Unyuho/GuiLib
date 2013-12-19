@@ -36,12 +36,6 @@ public class ContainerProgressSample extends Container implements IProgressBar
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting par1ICrafting)
-    {
-    	//他のユーザーのスロットも更新する場合
-    }
-
-    @Override
     public boolean canInteractWith(EntityPlayer entityplayer)
     {
         return true;
@@ -56,29 +50,38 @@ public class ContainerProgressSample extends Container implements IProgressBar
     	count = (count == Integer.MAX_VALUE ? 0 : count+1);
     	if(count % 2 == 0)
     	{
-    		value = (value == getMaximum() ? getMinimum() : value+1);
+    		value = (value == getMaximum(0) ? getMinimum(0) : value+1);
     	}
 
     	return value;
     }
 
+
+	//進捗状況的なアレ
 	@Override
 	public int increment(int progressID)
 	{
-		//進捗状況的なアレ
-		int value = getValue();
-		return value;
-	}
+		//複数使うならIDで分岐たのむっつってる
+		if(progressID == EnumKey.SAMPLEPROGRESS.ordinal())
+		{
+			int value = getValue();
+			return value;
+		}
 
-	@Override
-	public int getMinimum()
-	{
 		return 0;
 	}
 
 	@Override
-	public int getMaximum()
+	public int getMinimum(int progressID)
 	{
+		//IDは無視してもOK
+		return 0;
+	}
+
+	@Override
+	public int getMaximum(int progressID)
+	{
+		//IDは無視してもOK
 		return 100;
 	}
 }

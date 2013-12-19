@@ -31,36 +31,80 @@ public class GuiComponentContainer extends GuiContainer
     public GuiComponentContainer(Container container)
     {
         super(container);
-    }
-
-    /**
-     * スクロールバーの追加
-     * @param scrollBar
-     */
-    public void addScrollBar(GuiScrollBar scrollBar)
-    {
-    	scrollBarList.add(scrollBar);
-    }
-
-    /**
-     * プログレスバーの追加
-     * @param progressBar
-     */
-    public void addProgressBar(GuiProgressBar progressBar)
-    {
-    	progressBarList.add(progressBar);
-    }
-
-    @Override
-    public void initGui()
-    {
-    	super.initGui();
 
     	//スクロールバー初期設定
     	scrollBarList = new ArrayList<GuiScrollBar>();
 
     	//プログレスバー初期設定
     	progressBarList = new ArrayList<GuiProgressBar>();
+    }
+
+    /**
+     * スクロールバーの追加
+     * @param scrollBar
+     */
+    public final void addScrollBar(GuiScrollBar addScrollBar)
+    {
+    	for(GuiScrollBar scrollBar : scrollBarList)
+    	{
+    		if(scrollBar.getID() == addScrollBar.getID())
+    		{
+    			return;
+    		}
+    	}
+
+    	scrollBarList.add(addScrollBar);
+    }
+
+    /**
+     * スクロールバー用 getter
+     * @param scrollID
+     * @return
+     */
+    public final int getScrollValue(int scrollID)
+    {
+    	for(GuiScrollBar scrollBar : scrollBarList)
+    	{
+    		if(scrollID == scrollBar.getID())
+    		{
+    			return scrollBar.getValue();
+    		}
+    	}
+
+    	return 0;
+    }
+
+    /**
+     * スクロールバー用 setter
+     * @param scrollID
+     * @param value
+     */
+    public final void setScrollValue(int scrollID, int value)
+    {
+    	for(GuiScrollBar scrollBar : scrollBarList)
+    	{
+    		if(scrollID == scrollBar.getID())
+    		{
+    			scrollBar.setValue(value);
+    			break;
+    		}
+    	}
+    }
+
+    /**
+     * プログレスバーの追加
+     * @param progressBar
+     */
+    public final void addProgressBar(GuiProgressBar addProgressBar)
+    {
+    	for(GuiProgressBar progressBar : progressBarList)
+    	{
+    		if(progressBar.getID() == addProgressBar.getID())
+    		{
+    			return;
+    		}
+    	}
+    	progressBarList.add(addProgressBar);
     }
 
 
@@ -87,24 +131,6 @@ public class GuiComponentContainer extends GuiContainer
     	super.handleMouseInput();
 
     	//スクロールバー
-    	//ホイールを回した時の移動処理
-    	if(currentScrollBar == null)
-    	{
-    		for(GuiScrollBar scrollBar : scrollBarList)
-    		{
-    			if(scrollBar.mouseOver())
-    			{
-    				scrollBar.scrollTo();
-    				break;
-    			}
-    		}
-    	}
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float par3)
-    {
-    	//スクロールバー
     	//クリックした場合の移動処理
     	boolean flag = Mouse.isButtonDown(0);
     	if(flag)
@@ -113,7 +139,7 @@ public class GuiComponentContainer extends GuiContainer
     		{
     			for(GuiScrollBar scrollBar : scrollBarList)
     			{
-    				if( scrollBar.mouseOver(mouseX, mouseY) )
+    				if( scrollBar.mouseOver() )
     				{
     					currentScrollBar = scrollBar;
     					break;
@@ -128,9 +154,19 @@ public class GuiComponentContainer extends GuiContainer
 
     	if(currentScrollBar != null)
     	{
-    		currentScrollBar.scrollTo(flag, mouseX, mouseY);
+    		currentScrollBar.scrollTo(flag);
     	}
-
-    	super.drawScreen(mouseX, mouseY, par3);
+    	else
+    	{
+    		//ホイールを回した時の移動処理
+    		for(GuiScrollBar scrollBar : scrollBarList)
+    		{
+    			if(scrollBar.mouseOver())
+    			{
+    				scrollBar.scrollTo();
+    				break;
+    			}
+    		}
+    	}
     }
 }

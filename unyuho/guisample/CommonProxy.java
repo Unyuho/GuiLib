@@ -15,35 +15,36 @@ public class CommonProxy implements IGuiHandler
         return null;
     }
 
-    //スクロールバー用
+
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-        return new ContainerScrollSample(player.inventory, world);
+    	if(ID == 0)
+    	{
+    		 //スクロールバー用
+    		 return new ContainerScrollSample(player.inventory, world);
+    	}
+    	else
+    	{
+    		//プログレスバー用
+    		 return new ContainerProgressSample(player.inventory, world);
+    	}
+
     }
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-
-        return new GuiScrollSample(player.inventory, world);
+    	if(ID == 0)
+    	{
+    		 //スクロールバー用
+    		return new GuiScrollSample(player.inventory, world);
+    	}
+    	else
+    	{
+    		//プログレスバー用
+            return new GuiProgressSample(player.inventory, world);
+    	}
     }
-
-
-    /*
-    //プログレスバー用
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
-        return new ContainerProgressSample(player.inventory, world);
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
-
-        return new GuiProgressSample(player.inventory, world);
-    }
-    */
 }

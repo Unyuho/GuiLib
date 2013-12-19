@@ -14,16 +14,15 @@ public interface IProgressBar
 	 */
     public abstract int increment(int progressID);
 
-
     /**
      * 範囲の最小値
      * @param minValue 0とか返してちょ
      */
-    public abstract int getMinimum();
+    public abstract int getMinimum(int progressID);
 
     /**
      * 範囲の最大値
      * @param maxValue 100とか返してちょ
      */
-    public abstract int getMaximum();
+    public abstract int getMaximum(int progressID);
 }

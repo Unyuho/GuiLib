@@ -224,6 +224,23 @@ public abstract class GuiScrollBar extends Gui
      */
     abstract protected float repositionSlider(float sliderX, float sliderY);
 
+
+    /**
+     * スクロールバーの描写範囲内にカーソルが存在するか
+     */
+    public void scrollTo(boolean bClick)
+    {
+    	Minecraft mc = Minecraft.getMinecraft();
+        ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+        int width = scaledresolution.getScaledWidth();
+        int height = scaledresolution.getScaledHeight();
+        int mouseX = Mouse.getX() * width / mc.displayWidth;
+        int mouseY = height - Mouse.getY() * height / mc.displayHeight - 1;
+
+        scrollTo(bClick, mouseX, mouseY);
+    }
+
+
     /**
      * スクロール処理
      */

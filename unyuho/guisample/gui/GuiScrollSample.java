@@ -17,14 +17,8 @@ public class GuiScrollSample extends GuiComponentContainer
 {
 	private static final ResourceLocation recource = new ResourceLocation("unyuho","textures/gui/Sample.png");
 
-	//スクロールバー(縦)
-	private GuiScrollBarVertical scrollBarSampleVertical;
-	//スクロールバー(横)
-	private GuiScrollBarHorizontal scrollBarSampleHorizontal;
-
     //container
     private ContainerScrollSample container;
-
 
     public GuiScrollSample(InventoryPlayer inventoryplayer, World world)
     {
@@ -42,26 +36,26 @@ public class GuiScrollSample extends GuiComponentContainer
     	super.initGui();
 
     	//スクロールバー設定(横)
-    	int scrollBarId = 0;
+    	int scrollBarId = EnumKey.SAMPLESCROLLHORIZONTAL.ordinal();
     	int xPosition = guiLeft + 10;
     	int yPosition = guiTop + 10;
     	int size = 100;
     	int minValue = 0;
     	int maxValue = 100;
-    	scrollBarSampleHorizontal = new GuiScrollBarHorizontal(container, scrollBarId, xPosition, yPosition, size, minValue , maxValue);
+    	GuiScrollBarHorizontal scrollBarSampleHorizontal = new GuiScrollBarHorizontal(container, scrollBarId, xPosition, yPosition, size, minValue , maxValue);
 
     	//必須
     	addScrollBar(scrollBarSampleHorizontal);
 
 
     	//スクロールバー設定(縦)
-    	scrollBarId = 1;
+    	scrollBarId = EnumKey.SAMPLESCROLLVERTICAL.ordinal();
     	xPosition = guiLeft + 10;
     	yPosition = guiTop + 30;
     	size = 50;
     	minValue = 0;
     	maxValue = 50;
-    	scrollBarSampleVertical = new GuiScrollBarVertical(container, scrollBarId, xPosition, yPosition, size, minValue , maxValue);
+    	GuiScrollBarVertical scrollBarSampleVertical = new GuiScrollBarVertical(container, scrollBarId, xPosition, yPosition, size, minValue , maxValue);
 
     	//必須
     	addScrollBar(scrollBarSampleVertical);
@@ -70,10 +64,10 @@ public class GuiScrollSample extends GuiComponentContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-    	int value = scrollBarSampleHorizontal.getValue();
+    	int value = getScrollValue( EnumKey.SAMPLESCROLLHORIZONTAL.ordinal() );
         fontRenderer.drawString(Integer.toString(value), 115, 13, 0x404040);
 
-    	value = scrollBarSampleVertical.getValue();
+    	value = getScrollValue( EnumKey.SAMPLESCROLLVERTICAL.ordinal() );
         fontRenderer.drawString(Integer.toString(value), 12, 85, 0x404040);
     }
 

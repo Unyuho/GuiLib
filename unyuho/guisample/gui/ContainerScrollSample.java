@@ -17,7 +17,8 @@ import unyuho.common.gui.scrollbar.IScrollable;
 
 public class ContainerScrollSample extends Container implements IScrollable, IPacketReceive
 {
-    private int value;
+    private int valueHorizontal;
+    private int valueVertical;
 
     public ContainerScrollSample(InventoryPlayer inventoryplayer,World world)
     {
@@ -36,13 +37,8 @@ public class ContainerScrollSample extends Container implements IScrollable, IPa
             }
         }
 
-        value = 0;
-    }
-
-    @Override
-    public void addCraftingToCrafters(ICrafting par1ICrafting)
-    {
-    	//他のユーザーのスロットも更新する場合
+        valueHorizontal = 0;
+        valueVertical = 0;
     }
 
     @Override
@@ -50,7 +46,6 @@ public class ContainerScrollSample extends Container implements IScrollable, IPa
     {
         return true;
     }
-
 
     /**
      * スクロール時のイベント(クライアントのみ)
@@ -60,24 +55,26 @@ public class ContainerScrollSample extends Container implements IScrollable, IPa
     @Override
 	public void scrollPerformed(int scrollID, int value)
     {
-    	this.value = value;
+    	if(scrollID == EnumKey.SAMPLESCROLLHORIZONTAL.ordinal())
+    	{
+    		valueHorizontal = value;
+    	}
+    	else if(scrollID == EnumKey.SAMPLESCROLLVERTICAL.ordinal())
+    	{
+    		valueVertical = value;
+    	}
 
     	//任意で同期処理など
     	ComponentPacketHandler.sentPacketToServer(this);
 	}
-
-    public int getValue()
-    {
-    	return value;
-    }
-
 
     //クライアント
 	@Override
 	public void writePacketData(DataOutputStream dos)
 	{
 		try{
-			dos.writeInt(value);
+			dos.writeInt(valueHorizontal);
+			dos.writeInt(valueVertical);
 		}catch (IOException e){
 			e.printStackTrace();
 		}
@@ -87,7 +84,9 @@ public class ContainerScrollSample extends Container implements IScrollable, IPa
 	@Override
 	public void onPacketData(ByteArrayDataInput data)
 	{
-		System.out.println("受信ぅゅ");
-		value = data.readInt();
+		valueHorizontal = data.readInt();
+		valueVertical = data.readInt();
+
+		System.out.println("valueVertical : " + valueVertical + " / valueHorizontal : " + valueHorizontal);
 	}
 }

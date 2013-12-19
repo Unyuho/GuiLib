@@ -191,8 +191,8 @@ public class GuiProgressBar extends Gui
     private float getCurrentPosition()
     {
     	int currentValue = container.increment(id);
-    	int maxValue = container.getMaximum();
-    	int minValue = container.getMinimum();
+    	int maxValue = container.getMaximum(id);
+    	int minValue = container.getMinimum(id);
 
     	float currentPosition = (float)currentValue / (float)(maxValue - minValue);
     	if(currentPosition > 1.0F)

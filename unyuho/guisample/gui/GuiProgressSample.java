@@ -35,7 +35,7 @@ public class GuiProgressSample extends GuiComponentContainer
     {
     	super.initGui();
 
-    	int scrollBarId = 0;
+    	int scrollBarId = EnumKey.SAMPLEPROGRESS.ordinal();
     	int xPosition = guiLeft + 46;
     	int yPosition = guiTop + 48;
     	int size = 50;
