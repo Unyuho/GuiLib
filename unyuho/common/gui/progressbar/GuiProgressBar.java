@@ -1,23 +1,21 @@
 package unyuho.common.gui.progressbar;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
+import unyuho.common.gui.GuiBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiProgressBar extends Gui
+public class GuiProgressBar extends GuiBase
 {
 	private static final ResourceLocation resouce = new ResourceLocation("unyuho","textures/gui/progressbar/ProgressBar.png");
 
     private IProgressBar container;
-
-    //描写位置
-    private int xPosition;
-    private int yPosition;
 
     //プログレスバーのサイズ
     private int width;
@@ -57,10 +55,10 @@ public class GuiProgressBar extends Gui
 
     public GuiProgressBar(IProgressBar container, int progressID, int xPosition, int yPosition, int width, EnumVector vector)
     {
+    	super(xPosition, yPosition);
+
     	this.container = container;
         this.id = progressID;
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
         this.width = width;
         this.vector = vector;
         this.enabled = true;

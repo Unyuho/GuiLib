@@ -49,6 +49,7 @@ public class GuiComponentContainer extends GuiContainer
     	{
     		if(scrollBar.getID() == addScrollBar.getID())
     		{
+    			scrollBar.initGui(addScrollBar);
     			return;
     		}
     	}
@@ -101,6 +102,7 @@ public class GuiComponentContainer extends GuiContainer
     	{
     		if(progressBar.getID() == addProgressBar.getID())
     		{
+    			progressBar.initGui(addProgressBar);
     			return;
     		}
     	}

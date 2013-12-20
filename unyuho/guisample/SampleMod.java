@@ -29,7 +29,7 @@ public class SampleMod
 	public static SampleBlock block = null;
 
 	//Gui切り替え用
-	public static int gui = 1;
+	public static int gui = 0;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)

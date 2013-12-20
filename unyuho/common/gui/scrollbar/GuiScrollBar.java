@@ -1,24 +1,22 @@
 package unyuho.common.gui.scrollbar;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+
+import unyuho.common.gui.GuiBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public abstract class GuiScrollBar extends Gui
+public abstract class GuiScrollBar extends GuiBase
 {
 	private static final ResourceLocation resouce = new ResourceLocation("unyuho","textures/gui/scrollbar/ScrollBar.png");
 
     private IScrollable container;
-
-    //描写位置
-    private int xPosition;
-    private int yPosition;
 
     //スクロールバーのサイズ
     private int width;
@@ -82,9 +80,9 @@ public abstract class GuiScrollBar extends Gui
 
     public GuiScrollBar(IScrollable mainGui, int scrollID, int xPosition, int yPosition, int width, int height, int minValue, int maxValue)
     {
+    	super(xPosition, yPosition);
+
         this.id = scrollID;
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
         this.width = width;
         this.height = height;
         this.container = mainGui;
