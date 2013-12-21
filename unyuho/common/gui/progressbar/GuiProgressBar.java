@@ -13,15 +13,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiProgressBar extends GuiBase
 {
-	private static final ResourceLocation resouce = new ResourceLocation("unyuho","textures/gui/progressbar/ProgressBar.png");
+	private static final ResourceLocation resource = new ResourceLocation("unyuho","textures/gui/component/Component.png");
+
+	//左端
+    private final static int U_MIN = 0;
+	//右端
+    private final static int U_MAX = 136;
+
+	//色塗り部分
+    private final static int V_INCREMENT = 240;
+	//デフォルト部分
+    private final static int V_DEFAULT = 224;
+
+    //高さ
+    private final static int BAR_HEIGHT = 16;
+
 
     private IProgressBar container;
-
-    //プログレスバーのサイズ
-    private int width;
-
-    //進行方向
-    private EnumVector vector;
 
     //使わないと思うけど、識別ID
     private int id;
@@ -32,21 +40,14 @@ public class GuiProgressBar extends GuiBase
     //描写フラグ
     private boolean drawBar;
 
+    //進行方向
+    private EnumVector vector;
+
     //プログレスバーの表示開始位置
     private int progressbarU;
 
-	//左端
-    private final static int U_MIN = 0;
-	//右端
-    private final static int U_MAX = 72;
-
-	//色塗り部分
-    private final static int V_INCREMENT = 16;
-	//デフォルト部分
-    private final static int V_DEFAULT = 0;
-
-    //高さ
-    private final static int BAR_HEIGHT = 16;
+    //プログレスバーのサイズ
+    private int width;
 
     public GuiProgressBar(IProgressBar container, int progressID, int xPosition, int yPosition)
     {
@@ -76,7 +77,7 @@ public class GuiProgressBar extends GuiBase
     {
         if (this.drawBar)
         {
-        	Minecraft.getMinecraft().getTextureManager().bindTexture(resouce);
+        	Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
             float currentPosition = getCurrentPosition();

@@ -3,39 +3,31 @@ package unyuho.guisample.gui;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import com.google.common.io.ByteArrayDataInput;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import unyuho.common.gui.grid.ContainerGrid;
 import unyuho.common.gui.packet.ComponentPacketHandler;
 import unyuho.common.gui.packet.IPacketReceive;
 import unyuho.common.gui.scrollbar.IScrollable;
 
-public class ContainerScrollSample extends Container implements IScrollable, IPacketReceive
+import com.google.common.io.ByteArrayDataInput;
+
+public class ContainerScrollSample extends ContainerGrid implements IScrollable, IPacketReceive
 {
     private int valueHorizontal;
     private int valueVertical;
 
     public ContainerScrollSample(InventoryPlayer inventoryplayer,World world)
     {
-    	int slotIndex = 0;
+		int xPosition = 8;
+		int yPosition = 118;
 
-        for (int cnt = 0; cnt < 9; cnt++)
-        {
-            addSlotToContainer(new Slot(inventoryplayer, slotIndex++, 8 + cnt * 18, 176));
-        }
+		addPlayerInventoryGrid(inventoryplayer, xPosition, yPosition);
 
-        for (int cntY = 0; cntY < 3; cntY++)
-        {
-            for (int cntX = 0; cntX < 9; cntX++)
-            {
-                addSlotToContainer(new Slot(inventoryplayer, slotIndex++, 8 + cntX * 18, 118 + cntY * 18));
-            }
-        }
+		addInventoryGrid(inventoryplayer, 50, 30, 4, 1);
 
         valueHorizontal = 0;
         valueVertical = 0;
@@ -88,5 +80,12 @@ public class ContainerScrollSample extends Container implements IScrollable, IPa
 		valueVertical = data.readInt();
 
 		System.out.println("valueVertical : " + valueVertical + " / valueHorizontal : " + valueHorizontal);
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer,int slotnumber)
+	{
+		super.transferStackInSlot(par1EntityPlayer, slotnumber);
+		return null;
 	}
 }

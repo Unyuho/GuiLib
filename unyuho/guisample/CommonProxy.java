@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import unyuho.common.gui.GuiTabManager;
+import unyuho.common.gui.tab.GuiTabManager;
 import unyuho.guisample.gui.ContainerProgressSample;
 import unyuho.guisample.gui.ContainerScrollSample;
 import unyuho.guisample.gui.GuiProgressSample;

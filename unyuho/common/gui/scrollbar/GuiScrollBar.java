@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public abstract class GuiScrollBar extends GuiBase
 {
-	private static final ResourceLocation resouce = new ResourceLocation("unyuho","textures/gui/scrollbar/ScrollBar.png");
+	private static final ResourceLocation resource = new ResourceLocation("unyuho","textures/gui/component/Component.png");
 
     private IScrollable container;
 
@@ -168,7 +168,7 @@ public abstract class GuiScrollBar extends GuiBase
     {
         if (this.drawBar)
         {
-        	Minecraft.getMinecraft().getTextureManager().bindTexture(resouce);
+        	Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
             //スクロールバー描写

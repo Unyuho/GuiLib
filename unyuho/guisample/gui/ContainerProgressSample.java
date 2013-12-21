@@ -2,34 +2,24 @@ package unyuho.guisample.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
 import net.minecraft.world.World;
+import unyuho.common.gui.grid.ContainerGrid;
 import unyuho.common.gui.progressbar.IProgressBar;
-import unyuho.common.gui.scrollbar.IScrollable;
 
-public class ContainerProgressSample extends Container implements IProgressBar
+public class ContainerProgressSample extends ContainerGrid implements IProgressBar
 {
 	private int count;
     private int value;
 
     public ContainerProgressSample(InventoryPlayer inventoryplayer,World world)
     {
-    	int slotIndex = 0;
+		int xPosition = 8;
+		int yPosition = 118;
 
-        for (int cnt = 0; cnt < 9; cnt++)
-        {
-            addSlotToContainer(new Slot(inventoryplayer, slotIndex++, 8 + cnt * 18, 176));
-        }
+		addPlayerInventoryGrid(inventoryplayer, xPosition, yPosition);
 
-        for (int cntY = 0; cntY < 3; cntY++)
-        {
-            for (int cntX = 0; cntX < 9; cntX++)
-            {
-                addSlotToContainer(new Slot(inventoryplayer, slotIndex++, 8 + cntX * 18, 118 + cntY * 18));
-            }
-        }
+
+
 
         count = 0;
         value = 0;

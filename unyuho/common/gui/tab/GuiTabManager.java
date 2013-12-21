@@ -1,4 +1,4 @@
-package unyuho.common.gui;
+package unyuho.common.gui.tab;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,21 +26,21 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public final class GuiTabManager extends GuiScreen
 {
-	private static final ResourceLocation resource = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");
+	private static final ResourceLocation resource = new ResourceLocation("unyuho","textures/gui/component/Component.png");
 
 	//タブの基本設定
-	private static final int TAB_U = 28;
+	private static final int TAB_U = 224;
 	private static final int TAB_WIDTH = 28;
 	//選択してないやつ
-	private static final int TAB_V = 0;
+	private static final int TAB_V = 128;
 	private static final int TAB_HEIGHT = 28;
 	//選択してるやつ
-	private static final int CURRENTTAB_V = 32;
+	private static final int CURRENTTAB_V = 160;
 	private static final int CURRENTTAB_HEIGHT = 32;
 	//選択してないやつの反転
-	private static final int REVERSE_TAB_V = 64;
+	private static final int REVERSE_TAB_V = 192;
 	//選択してるやつの反転
-	private static final int REVERSE_CURRENTTAB_V = 96;
+	private static final int REVERSE_CURRENTTAB_V = 224;
 
 	//間隔
 	private static final int OFFSET_X = 6;
@@ -66,6 +66,7 @@ public final class GuiTabManager extends GuiScreen
     private Map<Integer, Integer> mapPosition;
     private Map<Integer, Icon> mapIcon;
     private Map<Integer, ResourceLocation> mapResourceLocation;
+    private boolean wasClicking;
 
     public GuiTabManager(int guiID, EntityPlayer player, World world, int x, int y, int z)
     {
@@ -256,7 +257,8 @@ public final class GuiTabManager extends GuiScreen
 	 */
 	private void checkTabClick(int mouseX, int mouseY)
 	{
-		if(Mouse.isButtonDown(0))
+		boolean clicking = Mouse.isButtonDown(0);
+		if(!wasClicking && clicking)
 		{
 			Iterator<Integer> iterator = mapPosition.keySet().iterator();
 			while(iterator.hasNext())
@@ -270,6 +272,8 @@ public final class GuiTabManager extends GuiScreen
 				}
 			}
 		}
+
+		wasClicking = clicking;
 	}
 
 	/**
