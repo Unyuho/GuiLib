@@ -24,10 +24,6 @@ public class GuiComponentContainer extends GuiContainer
 	//プログレスバー
 	private List<GuiProgressBar> progressBarList;
 
-    //container
-    private ContainerScrollSample container;
-
-
     public GuiComponentContainer(Container container)
     {
         super(container);
