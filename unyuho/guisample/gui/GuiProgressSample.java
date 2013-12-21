@@ -23,21 +23,9 @@ public class GuiProgressSample extends GuiComponentContainer
     //container
     private ContainerProgressSample container;
 
-    private EntityPlayer entityplayer;
-    private World world;
-    private int x;
-    private int y;
-    private int z;
-
-    public GuiProgressSample(InventoryPlayer inventoryplayer, World world, EntityPlayer entityplayer, int x, int y, int z)
+    public GuiProgressSample(InventoryPlayer inventoryplayer, World world)
     {
         super(new ContainerProgressSample(inventoryplayer, world));
-
-        this.entityplayer = entityplayer;
-        this.world = world;
-        this.x = x;
-        this.y = y;
-        this.z = z;
 
         this.ySize = 200;
         this.xSize = 175;
@@ -61,9 +49,6 @@ public class GuiProgressSample extends GuiComponentContainer
     	GuiProgressBar progressBarSample = new GuiProgressBar(container, scrollBarId, xPosition, yPosition, size, EnumVector.RIGHT);
 
     	addProgressBar(progressBarSample);
-
-
-    	buttonList.add(new GuiButton(0, guiLeft - 50 , guiTop , 50 , 20, "scroll"));
     }
 
     @Override
@@ -77,13 +62,5 @@ public class GuiProgressSample extends GuiComponentContainer
         //メイン画像
         mc.getTextureManager().bindTexture(recource);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-    }
-
-    @Override
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-    	super.actionPerformed(par1GuiButton);
-
-    	entityplayer.openGui(SampleMod.instance, 0, world, x, y, z);
     }
 }

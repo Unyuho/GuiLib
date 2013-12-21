@@ -39,6 +39,26 @@ public class GuiComponentContainer extends GuiContainer
     	progressBarList = new ArrayList<GuiProgressBar>();
     }
 
+	public final int getGuiLeft()
+	{
+		return guiLeft;
+	}
+
+	public final int getGuiTop()
+	{
+		return guiTop;
+	}
+
+	public final int getXSize()
+	{
+		return xSize;
+	}
+
+	public final int getYSize()
+	{
+		return ySize;
+	}
+
     /**
      * スクロールバーの追加
      * @param scrollBar

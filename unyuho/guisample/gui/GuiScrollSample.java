@@ -23,21 +23,9 @@ public class GuiScrollSample extends GuiComponentContainer
     //container
     private ContainerScrollSample container;
 
-    private EntityPlayer entityplayer;
-    private World world;
-    private int x;
-    private int y;
-    private int z;
-
-    public GuiScrollSample(InventoryPlayer inventoryplayer, World world, EntityPlayer entityplayer, int x, int y, int z)
+    public GuiScrollSample(InventoryPlayer inventoryplayer, World world)
     {
         super(new ContainerScrollSample(inventoryplayer, world));
-
-        this.entityplayer = entityplayer;
-        this.world = world;
-        this.x = x;
-        this.y = y;
-        this.z = z;
 
         this.ySize = 200;
         this.xSize = 175;
@@ -74,9 +62,6 @@ public class GuiScrollSample extends GuiComponentContainer
 
     	//必須
     	addScrollBar(scrollBarSampleVertical);
-
-
-    	buttonList.add(new GuiButton(1, guiLeft - 50 , guiTop + 20 , 50 , 20, "progress"));
     }
 
     @Override
@@ -100,13 +85,5 @@ public class GuiScrollSample extends GuiComponentContainer
         //メイン画像
         mc.getTextureManager().bindTexture(recource);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-    }
-
-    @Override
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-    	super.actionPerformed(par1GuiButton);
-
-    	entityplayer.openGui(SampleMod.instance, 1, world, x, y, z);
     }
 }
